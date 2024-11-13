@@ -1,2 +1,0 @@
-Add "Talk to" and "WhatsApp" buttons in footer at 
-/home/mimeld/mybank.mimeld.com/core/resources/views/templates/indigo_fusion/partials/footer.blade.php
