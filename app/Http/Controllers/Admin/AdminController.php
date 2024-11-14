@@ -73,7 +73,7 @@ class AdminController extends Controller {
 
     public function dashboard() {
         
-        $allowedDomains = ['rykege.com', 'rykegeweb.test']; // Replace with your allowed domains
+        $allowedDomains = ['rykege.com', 'rykegeweb.test', 'rykegebank-admin.test']; // Replace with your allowed domains
         $requestDomain = parse_url(request()->headers->get('referer'), PHP_URL_HOST);
 
         if (!in_array($requestDomain, $allowedDomains)) {
