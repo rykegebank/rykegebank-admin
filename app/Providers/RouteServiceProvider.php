@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider {
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::namespace($this->namespace)->middleware(VugiChugi::mdNm())->group(function () {
+            Route::namespace($this->namespace)->group(function () {
                 Route::prefix('api')
                     ->middleware(['api','maintenance'])
                     ->group(base_path('routes/api.php'));
