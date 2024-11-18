@@ -60,15 +60,22 @@ class CronController extends Controller
         }
     }
 
-    public function loan(){
+    public function loan()
+    {
 
     }
 
-    public function dps() {
+    public function dps()
+    {
 
     }
 
     public function fdr(){
 
+    }
+
+    public function test()
+    {
+        echo 'test';
     }
 }
