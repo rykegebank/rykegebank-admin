@@ -74,7 +74,7 @@ class CronController extends Controller
 
     }
 
-    public function test()
+    public function cronTest()
     {
         echo 'test';
     }
