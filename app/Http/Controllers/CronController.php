@@ -59,4 +59,16 @@ class CronController extends Controller
             return back()->withNotify($notify);
         }
     }
+
+    public function loan(){
+
+    }
+
+    public function dps() {
+
+    }
+
+    public function fdr(){
+
+    }
 }
