@@ -7,7 +7,11 @@ Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 });
 
-Route::get('cron', 'CronController@cron')->name('cron');
+Route::controller('CronController')->group(function () {
+    Route::get('cron', 'cron')->name('cron');
+    Route::get('cron-test', 'cronTest')->name('cron.test');
+});
+
 
 // User Support Ticket
 Route::controller('TicketController')->prefix('ticket')->name('ticket.')->group(function () {

@@ -15,7 +15,7 @@ class User extends Authenticatable
     use HasApiTokens, Searchable, ApiQuery, UserNotify;
 
     protected $hidden = [
-        'password', 'remember_token', 'ver_code', 'balance', 'kyc_data'
+        'password', 'remember_token', 'ver_code', 'kyc_data'
     ];
 
     protected $casts = [
