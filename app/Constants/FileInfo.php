@@ -16,27 +16,27 @@ class FileInfo {
 
     public function fileInfo() {
         $data['withdrawVerify'] = [
-            'path' => 'public/assets/images/verify/withdraw'
+            'path' => '../public/assets/images/verify/withdraw'
         ];
         $data['depositVerify'] = [
-            'path'      => 'public/assets/images/verify/deposit'
+            'path'      => '../public/assets/images/verify/deposit'
         ];
         $data['verify'] = [
-            'path'      => 'public/assets/verify'
+            'path'      => '../public/assets/verify'
         ];
         $data['default'] = [
-            'path'      => 'public/assets/images/default.png',
+            'path'      => '../public/assets/images/default.png',
         ];
         $data['withdrawMethod'] = [
-            'path'      => 'public/assets/images/withdraw/method',
+            'path'      => '../public/assets/images/withdraw/method',
             'size'      => '800x800',
         ];
         $data['ticket'] = [
-            'path'      => 'public/assets/support',
+            'path'      => '../public/assets/support',
         ];
 
         $data['logoIcon'] = [
-            'path'      => 'public/assets/images/logoIcon',
+            'path'      => '../public/assets/images/logoIcon',
         ];
         $data['favicon'] = [
             'size'      => '128x128',
