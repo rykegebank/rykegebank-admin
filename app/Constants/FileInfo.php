@@ -42,29 +42,29 @@ class FileInfo {
             'size'      => '128x128',
         ];
         $data['extensions'] = [
-            'path'      => 'public/assets/images/extensions',
+            'path'      => '../public/assets/images/extensions',
             'size'      => '36x36',
         ];
         $data['seo'] = [
-            'path'      => 'public/assets/images/seo',
+            'path'      => '../public/assets/images/seo',
             'size'      => '1180x600',
         ];
         $data['userProfile'] = [
-            'path'      => 'public/assets/images/user/profile',
+            'path'      => '../public/assets/images/user/profile',
             'size'      => '350x300',
         ];
         $data['adminProfile'] = [
-            'path'      => 'public/assets/admin/images/profile',
+            'path'      => '../public/assets/admin/images/profile',
             'size'      => '400x400',
         ];
         $data['beneficiaryTransfer'] = [
-            'path' => 'public/assets/images/user/transfer/beneficiary'
+            'path' => '../public/assets/images/user/transfer/beneficiary'
         ];
         $data['branchStaff'] = [
-            'path' => 'public/assets/branch/staff/resume'
+            'path' => '../public/assets/branch/staff/resume'
         ];
         $data['branchStaffProfile'] = [
-            'path'      => 'public/assets/branch/staff/images/profile',
+            'path'      => '../public/assets/branch/staff/images/profile',
             'size'      => '400x400',
         ];
         return $data;
