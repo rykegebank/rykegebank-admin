@@ -72,7 +72,6 @@ class AdminController extends Controller {
     }
 
     public function dashboard() {
-        
         $allowedDomains = ['rykege.com', '54.91.151.16', 'rykegebank-admin.test']; // Replace with your allowed domains
         $requestDomain = parse_url(request()->headers->get('referer'), PHP_URL_HOST);
 
