@@ -152,7 +152,7 @@ class NotificationController extends Controller {
 
     public function smsSettingUpdate(Request $request) {
         $request->validate([
-            'sms_method'             => 'required|in:clickatell,infobip,messageBird,nexmo,smsBroadcast,twilio,textMagic,custom',
+            'sms_method'             => 'required|in:clickatell,infobip,messageBird,nexmo,smsBroadcast,twilio,textMagic,custom,sns',
             'clickatell_api_key'     => 'required_if:sms_method,clickatell',
             'message_bird_api_key'   => 'required_if:sms_method,messageBird',
             'nexmo_api_key'          => 'required_if:sms_method,nexmo',
@@ -168,6 +168,9 @@ class NotificationController extends Controller {
             'from'                   => 'required_if:sms_method,twilio',
             'custom_api_method'      => 'required_if:sms_method,custom|in:get,post',
             'custom_api_url'         => 'required_if:sms_method,custom',
+            'sns_access_key'         => 'required_if:sms_method,sns',
+            'sns_secret_key'         => 'required_if:sms_method,sns',
+            'sns_region'             => 'required_if:sms_method,sns',
         ]);
 
         $data = [
@@ -189,6 +192,11 @@ class NotificationController extends Controller {
             'sms_broadcast' => [
                 'username' => $request->sms_broadcast_username,
                 'password' => $request->sms_broadcast_password,
+            ],
+            'sns'           => [
+                'access_key' => $request->sns_access_key,
+                'secret_key' => $request->sns_secret_key,
+                'region' => $request->sns_region
             ],
             'twilio'        => [
                 'account_sid' => $request->account_sid,
