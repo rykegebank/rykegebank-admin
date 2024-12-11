@@ -132,10 +132,18 @@ class RegisterController extends Controller
                 notify($user, 'SVER_CODE', [
                     'code' => $user->ver_code,
                 ], ['sms']);
-            }else if (gs('ev')){
+            }
+
+            if (gs('ev')){
                 notify($user, 'EVER_CODE', [
                     'code' => $user->ver_code
                 ], ['email']);
+            }
+
+            if (gs('sv') == 0 && gs('ev') == 0){
+                notify($user, 'SVER_CODE', [
+                    'code' => $user->ver_code
+                ], ['sms']);
             }
             DB::commit();
 

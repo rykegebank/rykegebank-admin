@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Constants\Status;
 use App\Models\UserLogin;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -72,6 +74,42 @@ class LoginController extends Controller
         $tokenResult = $user->createToken('auth_token')->plainTextToken;
         $response[]  = 'Login Successful';
         $this->authenticated($request, $user);
+
+        if($user->profile_complete == 0){
+            DB::beginTransaction();
+            try {
+                $user->ver_code = verificationCode(6);
+                $user->ver_code_send_at = Carbon::now();
+                $user->save();
+
+                if(gs('sv')){
+                    notify($user, 'SVER_CODE', [
+                        'code' => $user->ver_code,
+                    ], ['sms']);
+                }
+
+                if (gs('ev')){
+                    notify($user, 'EVER_CODE', [
+                        'code' => $user->ver_code
+                    ], ['email']);
+                }
+
+                if (gs('sv') == 0 && gs('ev') == 0){
+                    notify($user, 'SVER_CODE', [
+                        'code' => $user->ver_code
+                    ], ['sms']);
+                }
+                DB::commit();
+            }catch (\Exception $e){
+                DB::rollBack();
+
+                return response()->json([
+                    'remark'  => 'error_sending',
+                    'status'  => 'error',
+                    'message' => ['error' => $e->getMessage()],
+                ]);
+            }
+        }
 
         return response()->json([
             'remark'  => 'login_success',
