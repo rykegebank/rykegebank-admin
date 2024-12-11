@@ -92,7 +92,7 @@ class UserController extends Controller {
             'state'     => 'nullable|string',
             'zip'       => 'nullable|string',
             'city'      => 'nullable|string',
-            'image'     => ['required', 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
+            'image'     => ['nullable', 'image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
         ]);
 
         if ($validator->fails()) {
