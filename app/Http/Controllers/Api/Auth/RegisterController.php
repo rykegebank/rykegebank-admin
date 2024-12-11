@@ -132,9 +132,7 @@ class RegisterController extends Controller
                 notify($user, 'SVER_CODE', [
                     'code' => $user->ver_code,
                 ], ['sms']);
-            }
-
-            if (gs('ev')){
+            }else if (gs('ev')){
                 notify($user, 'EVER_CODE', [
                     'code' => $user->ver_code
                 ], ['email']);
