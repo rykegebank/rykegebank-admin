@@ -75,40 +75,37 @@ class LoginController extends Controller
         $response[]  = 'Login Successful';
         $this->authenticated($request, $user);
 
-        if($user->profile_complete == 0){
-            DB::beginTransaction();
-            try {
-                $user->ver_code = verificationCode(6);
-                $user->ver_code_send_at = Carbon::now();
-                $user->save();
 
-                if(gs('sv')){
-                    notify($user, 'SVER_CODE', [
-                        'code' => $user->ver_code,
-                    ], ['sms']);
-                }
+        DB::beginTransaction();
+        try {
+            $user->ver_code = verificationCode(6);
+            $user->ver_code_send_at = Carbon::now();
+            $user->save();
 
-                if (gs('ev')){
-                    notify($user, 'EVER_CODE', [
-                        'code' => $user->ver_code
-                    ], ['email']);
-                }
-
-                if (gs('sv') == 0 && gs('ev') == 0){
-                    notify($user, 'SVER_CODE', [
-                        'code' => $user->ver_code
-                    ], ['sms']);
-                }
-                DB::commit();
-            }catch (\Exception $e){
-                DB::rollBack();
-
-                return response()->json([
-                    'remark'  => 'error_sending',
-                    'status'  => 'error',
-                    'message' => ['error' => $e->getMessage()],
-                ]);
+            if(gs('sv')){
+                notify($user, 'SVER_CODE', [
+                    'code' => $user->ver_code,
+                ], ['sms']);
+            }else if (gs('ev')){
+                notify($user, 'EVER_CODE', [
+                    'code' => $user->ver_code
+                ], ['email']);
             }
+
+            if (gs('sv') == 0 && gs('ev') == 0){
+                notify($user, 'SVER_CODE', [
+                    'code' => $user->ver_code
+                ], ['sms']);
+            }
+            DB::commit();
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json([
+                'remark'  => 'error_sending',
+                'status'  => 'error',
+                'message' => ['error' => $e->getMessage()],
+            ]);
         }
 
         return response()->json([
