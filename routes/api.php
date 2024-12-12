@@ -79,7 +79,7 @@ Route::namespace ('Api')->name('api.')->group(function () {
             Route::middleware('registration.complete')->group(function () {
 
                 Route::controller('UserController')->group(function () {
-                    Route::get('dashboard', 'dashboard');
+                    Route::get('dashboard', 'dashboard')->name('dashboard');
                     Route::get('user-info', 'userInfo');
                     Route::get('referral-link', 'referralLink');
 

@@ -97,6 +97,10 @@ class User extends Authenticatable
         return $this->referees()->with('allReferees:id,ref_by,username');
     }
 
+    public function verifications() {
+        return $this->morphMany(OtpVerification::class, 'verifiable');
+    }
+
     // SCOPES
     public function scopeActive($query)
     {

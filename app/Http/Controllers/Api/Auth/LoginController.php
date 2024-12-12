@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Constants\Status;
+use App\Lib\OTPManager;
 use App\Models\UserLogin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -90,6 +91,14 @@ class LoginController extends Controller
                 notify($user, 'EVER_CODE', [
                     'code' => $user->ver_code
                 ], ['email']);
+            }else{
+                if($user->sv == 1 || $user->ev == 1){
+                    $otpManager = new OTPManager();
+                    $additionalData = [
+                        'after_verified' => 'api.dashboard',
+                    ];
+                    $otpManager->newOTP($user, 'sms', 'LOGIN_OTP', $additionalData);
+                }
             }
 
             if (gs('sv') == 0 && gs('ev') == 0 && $user->sv == 0){
