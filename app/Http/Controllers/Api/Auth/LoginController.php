@@ -82,17 +82,17 @@ class LoginController extends Controller
             $user->ver_code_send_at = Carbon::now();
             $user->save();
 
-            if(gs('sv')){
+            if(gs('sv') && $user->sv == 0){
                 notify($user, 'SVER_CODE', [
                     'code' => $user->ver_code,
                 ], ['sms']);
-            }else if (gs('ev')){
+            }else if (gs('ev') && $user->ev == 0){
                 notify($user, 'EVER_CODE', [
                     'code' => $user->ver_code
                 ], ['email']);
             }
 
-            if (gs('sv') == 0 && gs('ev') == 0){
+            if (gs('sv') == 0 && gs('ev') == 0 && $user->sv == 0){
                 notify($user, 'SVER_CODE', [
                     'code' => $user->ver_code
                 ], ['sms']);
