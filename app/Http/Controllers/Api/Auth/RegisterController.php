@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Constants\Status;
 use App\Http\Controllers\Controller;
+use App\Lib\OTPManager;
 use App\Models\AdminNotification;
 use App\Models\User;
 use App\Models\UserLogin;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -109,6 +112,8 @@ class RegisterController extends Controller
             ]);
         }
 
+        DB::beginTransaction();
+
         $accountNumber = generateAccountNumber();
         $request->merge(['account_number' => $accountNumber]);
         $user = $this->create($request->all());
@@ -118,12 +123,45 @@ class RegisterController extends Controller
         $response['token_type']   = 'Bearer';
         $notify[]                 = 'Registration successful';
 
-        return response()->json([
-            'remark'  => 'registration_success',
-            'status'  => 'success',
-            'message' => ['success' => $notify],
-            'data'    => $response,
-        ]);
+        try {
+            $user->ver_code = verificationCode(6);
+            $user->ver_code_send_at = Carbon::now();
+            $user->save();
+
+            if(gs('sv')){
+                notify($user, 'SVER_CODE', [
+                    'code' => $user->ver_code,
+                ], ['sms']);
+            }else if (gs('ev')){
+                notify($user, 'EVER_CODE', [
+                    'code' => $user->ver_code
+                ], ['email']);
+            }
+
+            if (gs('sv') == 0 && gs('ev') == 0){
+                notify($user, 'SVER_CODE', [
+                    'code' => $user->ver_code
+                ], ['sms']);
+            }
+            DB::commit();
+
+            return response()->json([
+                'remark'  => 'registration_success',
+                'status'  => 'success',
+                'message' => ['success' => $notify],
+                'data'    => $response,
+            ]);
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return response()->json([
+                'remark'  => 'error_sending',
+                'status'  => 'error',
+                'message' => ['error' => $e->getMessage()],
+            ]);
+        }
+
+
     }
 
     protected function create(array $data)

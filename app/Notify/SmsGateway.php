@@ -3,6 +3,7 @@
 namespace App\Notify;
 
 use App\Lib\CurlRequest;
+use Aws\Sns\SnsClient;
 use MessageBird\Client as MessageBirdClient;
 use MessageBird\Objects\Message;
 use Textmagic\Services\TextmagicRestClient;
@@ -106,6 +107,32 @@ class SmsGateway
                 'phones' => $this->to,
             )
         );
+    }
+
+    public function sns()
+    {
+        $params = array(
+            'credentials' => array(
+                'key' => $this->config->sns->access_key,
+                'secret' => $this->config->sns->secret_key
+            ),
+            'region' => $this->config->sns->region,
+            'version' => 'latest'
+        );
+        $sns = new SnsClient($params);
+
+        $args = array(
+            "MessageAttributes" => [
+                'AWS.SNS.SMS.SMSType' => [
+                    'DataType' => 'String',
+                    'StringValue' => 'Transactional'
+                ]
+            ],
+            "Message" => $this->message,
+            "PhoneNumber" => $this->to
+        );
+
+        $sns->publish($args);
     }
 
     public function custom()

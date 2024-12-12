@@ -34,6 +34,8 @@ final class Versions
      */
     const VERSIONS          = array (
   'authorizenet/authorizenet' => '2.0.2@a3e76f96f674d16e892f87c58bedb99dada4b067',
+  'aws/aws-crt-php' => 'v1.2.7@d71d9906c7bb63a28295447ba12e74723bd3730e',
+  'aws/aws-sdk-php' => '3.334.2@b19afc076bb1cc2617bdef76efd41587596109e7',
   'barryvdh/laravel-dompdf' => 'v2.0.1@9843d2be423670fb434f4c978b3c0f4dd92c87a6',
   'brick/math' => '0.11.0@0ad82ce168c82ba30d1c01ec86116ab52f589478',
   'btcpayserver/btcpayserver-greenfield-php' => 'v2.3.0@9a01503ce9f395bdbb9326fd380650c8faf449f6',
@@ -75,6 +77,7 @@ final class Versions
   'mollie/laravel-mollie' => 'v2.25.0@d71e4764d7daaa8b6f1b3152f97ab73679278e0f',
   'mollie/mollie-api-php' => 'v2.64.0@b54e0b05b98e15233d89724933c42c249d4b13d4',
   'monolog/monolog' => '2.9.2@437cb3628f4cf6042cc10ae97fc2b8472e48ca1f',
+  'mtdowling/jmespath.php' => '2.8.0@a2a865e05d5f420b50cc2f85bb78d565db12a6bc',
   'nesbot/carbon' => '2.72.1@2b3b3db0a2d0556a177392ff1a3bf5608fa09f78',
   'nette/schema' => 'v1.2.5@0462f0166e823aad657c9224d0f849ecac1ba10a',
   'nette/utils' => 'v4.0.3@a9d127dd6a203ce6d255b2e2db49759f7506e015',
@@ -183,7 +186,7 @@ final class Versions
   'spatie/laravel-ignition' => '1.6.4@1a2b4bd3d48c72526c0ba417687e5c56b5cf49bc',
   'symfony/yaml' => 'v6.4.0@4f9237a1bb42455d609e6687d2613dde5b41a587',
   'theseer/tokenizer' => '1.2.2@b2ad5003ca10d4ee50a12da31de12a5774ba6b96',
-  'laravel/laravel' => 'dev-main@1e2f7f8b7d92c053a457b9925feb43a665a1e81d',
+  'laravel/laravel' => 'dev-main@b018f7449621c44095c72a44f93899cf9934f6be',
 );
 
     private function __construct()

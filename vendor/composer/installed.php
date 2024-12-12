@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1e2f7f8b7d92c053a457b9925feb43a665a1e81d',
+        'reference' => 'b018f7449621c44095c72a44f93899cf9934f6be',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -17,6 +17,24 @@
             'install_path' => __DIR__ . '/../authorizenet/authorizenet',
             'aliases' => array(),
             'reference' => 'a3e76f96f674d16e892f87c58bedb99dada4b067',
+            'dev_requirement' => false,
+        ),
+        'aws/aws-crt-php' => array(
+            'pretty_version' => 'v1.2.7',
+            'version' => '1.2.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../aws/aws-crt-php',
+            'aliases' => array(),
+            'reference' => 'd71d9906c7bb63a28295447ba12e74723bd3730e',
+            'dev_requirement' => false,
+        ),
+        'aws/aws-sdk-php' => array(
+            'pretty_version' => '3.334.2',
+            'version' => '3.334.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../aws/aws-sdk-php',
+            'aliases' => array(),
+            'reference' => 'b19afc076bb1cc2617bdef76efd41587596109e7',
             'dev_requirement' => false,
         ),
         'barryvdh/laravel-debugbar' => array(
@@ -507,7 +525,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1e2f7f8b7d92c053a457b9925feb43a665a1e81d',
+            'reference' => 'b018f7449621c44095c72a44f93899cf9934f6be',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -695,6 +713,15 @@
             'replaced' => array(
                 0 => '^1.0',
             ),
+        ),
+        'mtdowling/jmespath.php' => array(
+            'pretty_version' => '2.8.0',
+            'version' => '2.8.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mtdowling/jmespath.php',
+            'aliases' => array(),
+            'reference' => 'a2a865e05d5f420b50cc2f85bb78d565db12a6bc',
+            'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(
             'pretty_version' => '1.11.1',

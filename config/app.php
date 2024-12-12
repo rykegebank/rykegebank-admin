@@ -181,6 +181,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+//        Aws\Laravel\AwsServiceProvider::class,
 
     ],
 
@@ -198,6 +199,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Status' => App\Constants\Status::class, 
         'PDF' => Barryvdh\DomPDF\Facade::class,
+//        'AWS' => Aws\Laravel\AwsFacade::class,
     ])->toArray(),
 
 ];

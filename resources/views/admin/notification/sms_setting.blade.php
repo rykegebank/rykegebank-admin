@@ -16,6 +16,7 @@
                                 <option value="smsBroadcast" @if(@$general->sms_config->name == 'smsBroadcast') selected @endif>@lang('Sms Broadcast')</option>
                                 <option value="twilio" @if(@$general->sms_config->name == 'twilio') selected @endif>@lang('Twilio')</option>
                                 <option value="textMagic" @if(@$general->sms_config->name == 'textMagic') selected @endif>@lang('Text Magic')</option>
+                                <option value="sns" @if(@$general->sms_config->name == 'sns') selected @endif>@lang('AWS SNS')</option>
                                 <option value="custom" @if(@$general->sms_config->name == 'custom') selected @endif>@lang('Custom API')</option>
                             </select>
                         </div>
@@ -223,6 +224,30 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4 d-none configForm" id="sns">
+                            <div class="col-md-12">
+                                <h6 class="mb-2">@lang('AWS SNS Configuration')</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>@lang('Access Key') </label>
+                                    <input type="text" class="form-control" placeholder="@lang('Access key')" name="sns_access_key" value="{{ @$general->sms_config->sns->access_key }}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>@lang('Secret Key') </label>
+                                    <input type="text" class="form-control" placeholder="@lang('Secret Key')" name="sns_secret_key" value="{{ @$general->sms_config->sns->secret_key }}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>@lang('Region') </label>
+                                    <input type="text" class="form-control" placeholder="@lang('Region')" name="sns_region" value="{{ @$general->sms_config->sns->region }}"/>
                                 </div>
                             </div>
                         </div>
