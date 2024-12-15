@@ -92,7 +92,7 @@ class LoginController extends Controller
                     'code' => $user->ver_code
                 ], ['email']);
             }else{
-                if($user->sv == 1 || $user->ev == 1){
+                if($user->sv == 1 && $user->ev == 1){
                     $otpManager = new OTPManager();
                     $additionalData = [
                         'after_verified' => 'api.dashboard',
