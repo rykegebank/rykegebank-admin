@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Constants\Status;
 use App\Lib\OTPManager;
+use App\Models\OtpVerification;
 use App\Models\UserLogin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -83,6 +84,7 @@ class LoginController extends Controller
             $user->ver_code_send_at = Carbon::now();
             $user->save();
 
+            $otpVerificationId = null;
             if(gs('sv') && $user->sv == 0){
                 notify($user, 'SVER_CODE', [
                     'code' => $user->ver_code,
@@ -98,6 +100,14 @@ class LoginController extends Controller
                         'after_verified' => 'api.dashboard',
                     ];
                     $otpManager->newOTP($user, 'sms', 'LOGIN_OTP', $additionalData, true);
+                    $otpVerification = OtpVerification::query()
+                        ->where('user_id' , $request->user()->id)
+                        ->orderBy('send_at', 'desc')
+                        ->first();
+
+                    if($otpVerification){
+                        $otpVerificationId = $otpVerification->id;
+                    }
                 }
             }
 
@@ -123,6 +133,7 @@ class LoginController extends Controller
             'message' => ['success' => $response],
             'data'    => [
                 'user'         => auth()->user(),
+                'otp_ver_id'   => $otpVerificationId,
                 'access_token' => $tokenResult,
                 'token_type'   => 'Bearer',
             ],
