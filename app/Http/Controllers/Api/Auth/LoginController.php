@@ -97,7 +97,7 @@ class LoginController extends Controller
                     $additionalData = [
                         'after_verified' => 'api.dashboard',
                     ];
-                    $otpManager->newOTP($user, 'sms', 'LOGIN_OTP', $additionalData);
+                    $otpManager->newOTP($user, 'sms', 'LOGIN_OTP', $additionalData, true);
                 }
             }
 
