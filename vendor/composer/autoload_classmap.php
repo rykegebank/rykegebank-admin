@@ -30,6 +30,7 @@ return array(
     'AWS\\CRT\\OptionValue' => $vendorDir . '/aws/aws-crt-php/src/AWS/CRT/Options.php',
     'AWS\\CRT\\Options' => $vendorDir . '/aws/aws-crt-php/src/AWS/CRT/Options.php',
     'App\\Console\\Commands\\CreateRolePermission' => $baseDir . '/app/Console/Commands/CreateRolePermission.php',
+    'App\\Console\\Commands\\CreateUserTransaction' => $baseDir . '/app/Console/Commands/CreateUserTransaction.php',
     'App\\Console\\Commands\\UpdatePermissions' => $baseDir . '/app/Console/Commands/UpdatePermissions.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Constants\\FileInfo' => $baseDir . '/app/Constants/FileInfo.php',

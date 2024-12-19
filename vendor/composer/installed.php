@@ -3,7 +3,11 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => '75179a3d35747b5f056c593e5bd629c4ef589aaa',
+=======
+        'reference' => 'b018f7449621c44095c72a44f93899cf9934f6be',
+>>>>>>> origin/seeder/transction-by-user
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -17,6 +21,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../authorizenet/authorizenet',
             'aliases' => array(),
+<<<<<<< HEAD
             'dev_requirement' => false,
         ),
         'aws/aws-crt-php' => array(
@@ -35,6 +40,8 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),
+=======
+>>>>>>> origin/seeder/transction-by-user
             'dev_requirement' => false,
         ),
         'barryvdh/laravel-debugbar' => array(
@@ -522,7 +529,11 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => '75179a3d35747b5f056c593e5bd629c4ef589aaa',
+=======
+            'reference' => 'b018f7449621c44095c72a44f93899cf9934f6be',
+>>>>>>> origin/seeder/transction-by-user
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

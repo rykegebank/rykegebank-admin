@@ -802,6 +802,7 @@ class ComposerStaticInit23564710afe4847b62f8f60bbd5b8e90
         'AWS\\CRT\\OptionValue' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/Options.php',
         'AWS\\CRT\\Options' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/Options.php',
         'App\\Console\\Commands\\CreateRolePermission' => __DIR__ . '/../..' . '/app/Console/Commands/CreateRolePermission.php',
+        'App\\Console\\Commands\\CreateUserTransaction' => __DIR__ . '/../..' . '/app/Console/Commands/CreateUserTransaction.php',
         'App\\Console\\Commands\\UpdatePermissions' => __DIR__ . '/../..' . '/app/Console/Commands/UpdatePermissions.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Constants\\FileInfo' => __DIR__ . '/../..' . '/app/Constants/FileInfo.php',
