@@ -13,7 +13,7 @@ class CreateUserTransaction extends Command
      *
      * @var string
      */
-    protected $signature = 'create:transactions {--email=}';
+    protected $signature = 'create:transactions {--email=} {--count=100}';
 
     /**
      * The console command description.
@@ -31,7 +31,7 @@ class CreateUserTransaction extends Command
     {
         if($email = $this->option('email')) {
 
-            for($i = 1; $i <= 100; $i ++){
+            for($i = 1; $i <= $this->option('count'); $i ++){
                 $user   = User::query()
                     ->where('email', $email)
                     ->first();
