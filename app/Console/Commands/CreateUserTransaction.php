@@ -64,6 +64,7 @@ class CreateUserTransaction extends Command
                 }
             }else{
                 $this->info('This '. $email. ' not found in the database');
+                return Command::FAILURE;
             }
 
             $this->info('Created' . $this->option('count'). ' transactions record for '. $email . ' successfully');
