@@ -183,7 +183,7 @@ final class Versions
   'spatie/laravel-ignition' => '1.6.4@1a2b4bd3d48c72526c0ba417687e5c56b5cf49bc',
   'symfony/yaml' => 'v6.4.0@4f9237a1bb42455d609e6687d2613dde5b41a587',
   'theseer/tokenizer' => '1.2.2@b2ad5003ca10d4ee50a12da31de12a5774ba6b96',
-  'laravel/laravel' => 'dev-main@1e2f7f8b7d92c053a457b9925feb43a665a1e81d',
+  'laravel/laravel' => 'dev-main@b018f7449621c44095c72a44f93899cf9934f6be',
 );
 
     private function __construct()
