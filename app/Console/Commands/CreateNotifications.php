@@ -35,17 +35,12 @@ class CreateNotifications extends Command
                 ->first();
 
             if($user){
-                $clickValue = [
-                    "name" => "LOAN_INSTALLMENT_DUE",
-                    "id" => 1
-                ];
-
                 for ($i=1; $i <= $this->option('count'); $i++){
                     $userNotification              = new UserNotification();
                     $userNotification->title       = 'Loan installment due';
                     $userNotification->user_id     = $user->id;
                     $userNotification->remark      = 'LOAN_INSTALLMENT_DUE';
-                    $userNotification->click_value = json_encode($clickValue);
+                    $userNotification->click_value = 1;
                     $userNotification->save();
                 }
 
