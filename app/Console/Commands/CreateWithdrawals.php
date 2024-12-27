@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Constants\Status;
 use App\Lib\OTPManager;
 use App\Models\OtpVerification;
 use App\Models\Transaction;
@@ -51,6 +52,9 @@ class CreateWithdrawals extends Command
             );
 
             for ($i = 1; $i <= $this->option('count'); $i++){
+                $user = User::query()
+                    ->where('email', $email)
+                    ->first();
                 $verification = New OtpVerification();
                 $verification->verifiable_type = 'App\Models\WithdrawMethod';
                 $verification->verifiable_id = 1;
@@ -86,7 +90,12 @@ class CreateWithdrawals extends Command
                 $withdraw->final_amount = $finalAmount;
                 $withdraw->after_charge = $afterCharge;
                 $withdraw->trx          = getTrx();
+                $withdraw->status               = Status::PAYMENT_PENDING;
+                $withdraw->withdraw_information = null;
                 $withdraw->save();
+
+                $user->balance -= $amount;
+                $user->save();
 
                 $transaction               = new Transaction();
                 $transaction->user_id      = $withdraw->user_id;
