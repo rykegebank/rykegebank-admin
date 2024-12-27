@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use App\Lib\OTPManager;
 use App\Models\OtpVerification;
+use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UserNotification;
 use App\Models\Withdrawal;
 use App\Models\WithdrawMethod;
 use Carbon\Carbon;
@@ -85,8 +87,28 @@ class CreateWithdrawals extends Command
                 $withdraw->after_charge = $afterCharge;
                 $withdraw->trx          = getTrx();
                 $withdraw->save();
+
+                $transaction               = new Transaction();
+                $transaction->user_id      = $withdraw->user_id;
+                $transaction->amount       = $withdraw->amount;
+                $transaction->post_balance = $user->balance;
+                $transaction->charge       = $withdraw->charge;
+                $transaction->trx_type     = '-';
+                $transaction->details      = showAmount($withdraw->final_amount) . ' ' . $withdraw->currency . ' Withdraw Via ' . $withdraw->method->name;
+                $transaction->trx          = $withdraw->trx;
+                $transaction->remark       = 'withdraw';
+                $transaction->save();
+
+                $userNotification              = new UserNotification();
+                $userNotification->title       = 'Withdraw - Requested';
+                $userNotification->user_id     = $withdraw->user_id;
+                $userNotification->remark      = 'WITHDRAW_REQUEST';
+                $userNotification->click_value = $withdraw->id;
+                $userNotification->save();
             }
         }
+
+        $this->info('Created Withdrawal Records Successfully');
 
         return Command::SUCCESS;
     }
