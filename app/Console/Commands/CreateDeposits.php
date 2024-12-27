@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Constants\Status;
 use App\Models\Deposit;
 use App\Models\GatewayCurrency;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -76,6 +77,21 @@ class CreateDeposits extends Command
                 $data->btc_wallet      = "";
                 $data->trx             = getTrx();
                 $data->save();
+
+                $currentUser = User::find($user->id);
+                $currentUser->balance += $amount;
+                $user->save();
+
+                $transaction               = new Transaction();
+                $transaction->user_id      = $currentUser->id;
+                $transaction->amount       = $amount;
+                $transaction->post_balance = $currentUser->balance;
+                $transaction->charge       = $data->charge;
+                $transaction->trx_type     = '+';
+                $transaction->details      = 'Deposit Via ' . $data->gatewayCurrency()->name;
+                $transaction->trx          = $data->trx;
+                $transaction->remark       = 'deposit';
+                $transaction->save();
             }
         }
 
