@@ -7,6 +7,7 @@ use App\Models\Deposit;
 use App\Models\GatewayCurrency;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UserNotification;
 use Illuminate\Console\Command;
 
 class CreateDeposits extends Command
@@ -80,7 +81,7 @@ class CreateDeposits extends Command
 
                 $currentUser = User::find($user->id);
                 $currentUser->balance += $amount;
-                $user->save();
+                $currentUser->save();
 
                 $transaction               = new Transaction();
                 $transaction->user_id      = $currentUser->id;
@@ -92,8 +93,17 @@ class CreateDeposits extends Command
                 $transaction->trx          = $data->trx;
                 $transaction->remark       = 'deposit';
                 $transaction->save();
+
+                $userNotification              = new UserNotification();
+                $userNotification->title       = 'Deposit Completed Successfully';
+                $userNotification->user_id     = $currentUser->id;
+                $userNotification->remark      = 'DEPOSIT_COMPLETE';
+                $userNotification->click_value = $data->id;
+                $userNotification->save();
             }
         }
+
+        $this->info('Successfully created deposit data');
 
         return Command::SUCCESS;
     }
