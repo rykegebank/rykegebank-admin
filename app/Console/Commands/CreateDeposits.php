@@ -77,6 +77,7 @@ class CreateDeposits extends Command
                 $data->btc_amo         = 0;
                 $data->btc_wallet      = "";
                 $data->trx             = getTrx();
+                $data->status = Status::PAYMENT_SUCCESS;
                 $data->save();
 
                 $currentUser = User::find($user->id);
