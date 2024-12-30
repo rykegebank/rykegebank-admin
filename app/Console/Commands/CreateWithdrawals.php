@@ -90,7 +90,7 @@ class CreateWithdrawals extends Command
                 $withdraw->final_amount = $finalAmount;
                 $withdraw->after_charge = $afterCharge;
                 $withdraw->trx          = getTrx();
-                $withdraw->status               = Status::PAYMENT_PENDING;
+                $withdraw->status               = Status::PAYMENT_SUCCESS;
                 $withdraw->withdraw_information = null;
                 $withdraw->save();
 
