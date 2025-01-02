@@ -109,9 +109,9 @@ class CreateWithdrawals extends Command
                 $transaction->save();
 
                 $userNotification              = new UserNotification();
-                $userNotification->title       = 'Withdraw - Requested';
+                $userNotification->title       = 'Withdraw - Approved';
                 $userNotification->user_id     = $withdraw->user_id;
-                $userNotification->remark      = 'WITHDRAW_REQUEST';
+                $userNotification->remark      = 'WITHDRAW_APPROVE';
                 $userNotification->click_value = $withdraw->id;
                 $userNotification->save();
             }
