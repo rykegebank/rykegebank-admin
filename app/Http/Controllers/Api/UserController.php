@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Models\UserNotification;
 use App\Models\Withdrawal;
 use App\Rules\FileTypeValidate;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -223,7 +224,19 @@ class UserController extends Controller {
 
     public function transactions(Request $request) {
         $remarks      = Transaction::distinct('remark')->get('remark');
-        $transactions = Transaction::where('user_id', auth()->id())->searchable(['trx'])->filter(['trx_type', 'remark'])->apiQuery();
+        $transactions = Transaction::query()
+            ->where('user_id', auth()->id())
+            ->searchable(['trx'])
+            ->filter(['trx_type', 'remark']);
+
+        if(isset($request->type) && strtolower($request->type) == 'minus'){
+            $transactions = $transactions->minus()->apiQuery();
+        }else if(isset($request->type) && strtolower($request->type) == 'plus'){
+            $transactions = $transactions->plus()->apiQuery();
+        }else{
+            $transactions = $transactions->apiQuery();
+        }
+
         $notify[]     = 'Transactions data';
         return response()->json([
             'remark'  => 'transactions',
