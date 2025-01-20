@@ -174,4 +174,14 @@ class User extends Authenticatable
             }
         });
     }
+
+    public function getAddressAttribute($value) {
+        $json_items = json_decode($value);
+
+        foreach ($json_items as $key => $item){
+            if ($item ==  'undefined') $json_items->$key = "";
+        }
+
+        return $json_items;
+    }
 }
