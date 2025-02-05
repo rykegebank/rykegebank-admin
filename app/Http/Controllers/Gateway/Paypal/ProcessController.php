@@ -11,6 +11,7 @@ use App\Lib\CurlRequest;
 class ProcessController extends Controller {
 
     public static function process($deposit) {
+        $requestDomain = parse_url(request()->headers->get('referer'), PHP_URL_HOST);
         $general              = gs();
         $paypalAcc            = json_decode($deposit->gatewayCurrency()->gateway_parameter);
         $val['cmd']           = '_xclick';
@@ -27,8 +28,8 @@ class ProcessController extends Controller {
         $send['val']          = $val;
         $send['view']         = 'user.payment.redirect';
         $send['method']       = 'post';
-        // $send['url'] = 'https://www.sandbox.paypal.com/'; // use for sandbod text
-        $send['url'] = 'https://www.paypal.com/cgi-bin/webscr';
+        $send['url'] = $requestDomain == 'rykege.com' ? 'https://www.paypal.com/cgi-bin/webscr' : 'https://www.sandbox.paypal.com/'; // use for sandbod text
+//        $send['url'] = 'https://www.paypal.com/cgi-bin/webscr';
         return json_encode($send);
     }
 
@@ -48,9 +49,13 @@ class ProcessController extends Controller {
             $req .= "&$key=$value";
             $details[$key] = $value;
         }
+        $requestDomain = parse_url(request()->headers->get('referer'), PHP_URL_HOST);
 
-        // $paypalURL = "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr?"; // use for sandbox text
-        $paypalURL = "https://ipnpb.paypal.com/cgi-bin/webscr?";
+        if($requestDomain == 'rykege.com')
+            $paypalURL = "https://ipnpb.paypal.com/cgi-bin/webscr?";
+        else
+            $paypalURL = "https://ipnpb.sandbox.paypal.com/cgi-bin/webscr?"; // use for sandbox text
+
         $url = $paypalURL . $req;
         $response = CurlRequest::curlContent($url);
 
