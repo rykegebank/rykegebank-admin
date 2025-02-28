@@ -35,7 +35,7 @@ class CreateDeposits extends Command
     {
         $method_code = 103;
         $currency = 'USD';
-        $amount = 100;
+        $amount = 111;
 
         if($email = $this->option('email')){
             $user = User::query()
